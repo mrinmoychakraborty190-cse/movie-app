@@ -2,21 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Movie Finder</title>
+  <title>Netflix Clone</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header>
-    <h1>🎬 Movie Finder</h1>
-    <input type="text" id="searchInput" placeholder="Search movies..." />
-    <button onclick="searchMovies()">Search</button>
-  </header>
+<header>
+  <h1>NETFLIX</h1>
+  <input type="text" id="searchInput" placeholder="Search movies..." />
+</header>
 
-  <main>
-    <div id="movies" class="movie-container"></div>
-  </main>
+<section id="banner"></section>
 
-  <script src="script.js"></script>
+<h2>🔥 Trending</h2>
+<div id="trending" class="row"></div>
+
+<h2>🎭 Action Movies</h2>
+<div id="action" class="row"></div>
+
+<h2>😂 Comedy Movies</h2>
+<div id="comedy" class="row"></div>
+
+<script src="script.js"></script>
 </body>
 </html>
