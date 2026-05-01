@@ -25,6 +25,7 @@ h2 {
   display: flex;
   overflow-x: scroll;
   padding: 20px;
+  min-height: 220px;
 }
 
 .row::-webkit-scrollbar {
