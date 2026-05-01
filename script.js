@@ -1,35 +1,56 @@
 const apiKey = "55d2305e";
+const baseUrl = "https://api.themoviedb.org/3";
 
-async function searchMovies() {
-  const query = document.getElementById("searchInput").value;
+// Fetch Trending
+fetch(`${baseUrl}/trending/movie/week?api_key=${apiKey}`)
+  .then(res => res.json())
+  .then(data => {
+    showMovies(data.results, "trending");
+    setBanner(data.results[0]);
+  });
 
-  if (!query) return alert("Enter a movie name");
+// Fetch Action Movies
+fetch(`${baseUrl}/discover/movie?api_key=${apiKey}&with_genres=28`)
+  .then(res => res.json())
+  .then(data => showMovies(data.results, "action"));
 
-  const res = await fetch(`https://www.omdbapi.com/?s=${query}&apikey=${apiKey}`);
-  const data = await res.json();
+// Fetch Comedy Movies
+fetch(`${baseUrl}/discover/movie?api_key=${apiKey}&with_genres=35`)
+  .then(res => res.json())
+  .then(data => showMovies(data.results, "comedy"));
 
-  displayMovies(data.Search);
-}
-
-function displayMovies(movies) {
-  const container = document.getElementById("movies");
+// Show Movies
+function showMovies(movies, elementId) {
+  const container = document.getElementById(elementId);
   container.innerHTML = "";
 
-  if (!movies) {
-    container.innerHTML = "<h2>No results found</h2>";
-    return;
-  }
-
   movies.forEach(movie => {
-    const movieCard = document.createElement("div");
-    movieCard.classList.add("movie-card");
+    const div = document.createElement("div");
+    div.classList.add("movie");
 
-    movieCard.innerHTML = `
-      <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/200"}" />
-      <h3>${movie.Title}</h3>
-      <p>${movie.Year}</p>
+    div.innerHTML = `
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" />
     `;
 
-    container.appendChild(movieCard);
+    container.appendChild(div);
   });
+}
+
+// Banner
+function setBanner(movie) {
+  document.getElementById("banner").style.backgroundImage =
+    `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`;
+}
+
+// Search
+document.getElementById("searchInput").addEventListener("keyup", e => {
+  if (e.key === "Enter") {
+    searchMovies(e.target.value);
+  }
+});
+
+function searchMovies(query) {
+  fetch(`${baseUrl}/search/movie?api_key=${apiKey}&query=${query}`)
+    .then(res => res.json())
+    .then(data => showMovies(data.results, "trending"));
 }
