@@ -1,60 +1,53 @@
 body {
-  background-color: #141414;
+  background-color: #111;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   margin: 0;
 }
 
 header {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
 }
 
 input {
-  padding: 10px;
-  width: 250px;
+  padding: 8px;
   border-radius: 5px;
   border: none;
 }
 
-button {
-  padding: 10px 15px;
-  margin-left: 10px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+h2 {
+  margin-left: 20px;
 }
 
-.movie-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+.row {
+  display: flex;
+  overflow-x: scroll;
   padding: 20px;
 }
 
-.movie-card {
-  background-color: #222;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+.movie {
+  margin-right: 10px;
   transition: transform 0.3s;
 }
 
-.movie-card:hover {
-  transform: scale(1.05);
+.movie img {
+  width: 150px;
+  border-radius: 5px;
 }
 
-.movie-card img {
-  width: 100%;
+.movie:hover {
+  transform: scale(1.2);
+}
+
+#banner {
+  height: 300px;
+  background-size: cover;
+  margin: 20px;
   border-radius: 10px;
-}
-
-.movie-card h3 {
-  margin: 10px 0 5px;
-}
-
-.movie-card p {
-  color: #bbb;
 }
